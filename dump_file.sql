@@ -211,24 +211,6 @@ l1vp71ogxijvi7om270oi8j6x2tzbj5s	.eJxVjMEOgjAQRP-lZ9PQ0rJdj975hma7XSxqIKFwMv67kH
 
 
 --
--- Data for Name: myapp_location; Type: TABLE DATA; Schema: public; Owner: mydatabaseuser
---
-
-COPY public.myapp_location (id, name, lon, lat) FROM stdin;
-\.
-
-
---
--- Data for Name: myapp_peak; Type: TABLE DATA; Schema: public; Owner: mydatabaseuser
---
-
-COPY public.myapp_peak (id, name, lat, lon, altitude) FROM stdin;
-1	everest	27.9879017	86.9253141	8848.86
-2	coco	32	65.23	230.22
-\.
-
-
---
 -- Data for Name: peaks_app_peak; Type: TABLE DATA; Schema: public; Owner: mydatabaseuser
 --
 
@@ -321,20 +303,6 @@ SELECT pg_catalog.setval('public.django_content_type_id_seq', 12, true);
 --
 
 SELECT pg_catalog.setval('public.django_migrations_id_seq', 28, true);
-
-
---
--- Name: myapp_location_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mydatabaseuser
---
-
-SELECT pg_catalog.setval('public.myapp_location_id_seq', 1, false);
-
-
---
--- Name: myapp_peak_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mydatabaseuser
---
-
-SELECT pg_catalog.setval('public.myapp_peak_id_seq', 3, true);
 
 
 --
