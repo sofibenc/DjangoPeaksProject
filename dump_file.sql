@@ -313,13 +313,6 @@ SELECT pg_catalog.setval('public.peaks_app_peak_id_seq', 9, true);
 
 
 --
--- Name: peaks_app_whitelist_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mydatabaseuser
---
-
-SELECT pg_catalog.setval('public.peaks_app_whitelist_id_seq', 19, true);
-
-
---
 -- Name: peaks_app_whitelistcountry_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mydatabaseuser
 --
 
