@@ -9,6 +9,7 @@ from django.shortcuts import render
 from django_admin_geomap import geomap_context
 from django.utils import timezone
 from django.core.exceptions import PermissionDenied
+from django.http import HttpResponseForbidden
 
 from requests import get
 import coreapi
@@ -16,6 +17,7 @@ import ipinfo
 from .models import Peak, WhitelistCountry, RejectedConnection
 from .serializers import PeakSerializer
 
+ACCESS_RESTRICTION_ERROR_MSG = {"Detail": "Operation not permitted in your country"}
 
 def get_ip_details(ip_address=None):
     ipinfo_token = "4be8f32f80c8a5"
@@ -65,10 +67,10 @@ def home(request):
         return render(request, 'peaks_app/home.html', geomap_context(Peak.objects.all()))
     else:
         AppendRejectedConnection(remote_addr, country_name)
-        raise PermissionDenied
+        return HttpResponseForbidden("Content not available in your country")
 
 
-# Describing schema to workaround swagger and docs limitation
+# Describing some custom API schema
 class peakCreateUpdateViewSchema(AutoSchema):
     """
         Describe Create & Update schema
@@ -117,7 +119,7 @@ def peakList(request):
         serializer = PeakSerializer(peaks, many=True)
         return Response(serializer.data)
     else:
-        return Response(status=status.HTTP_403_FORBIDDEN)
+        return Response(ACCESS_RESTRICTION_ERROR_MSG, status=status.HTTP_403_FORBIDDEN)
 
 
 @api_view(['DELETE'])
@@ -131,7 +133,7 @@ def peakDelete(request, pk):
         peaks.delete()
         return Response('Deleted')
     else:
-        return Response(status=status.HTTP_403_FORBIDDEN)
+        return Response(ACCESS_RESTRICTION_ERROR_MSG, status=status.HTTP_403_FORBIDDEN)
 
 
 @api_view(['GET'])
@@ -145,7 +147,7 @@ def peakRead(request, pk):
         serializer = PeakSerializer(peaks, many=False)
         return Response(serializer.data)
     else:
-        return Response(status=status.HTTP_403_FORBIDDEN)
+        return Response(ACCESS_RESTRICTION_ERROR_MSG, status=status.HTTP_403_FORBIDDEN)
 
 
 class peakListBoundingBoxAPIView(APIView):
@@ -175,7 +177,7 @@ class peakListBoundingBoxAPIView(APIView):
                     c.append(x)
             return Response(c)
         else:
-            return Response(status=status.HTTP_403_FORBIDDEN)
+            return Response(ACCESS_RESTRICTION_ERROR_MSG, status=status.HTTP_403_FORBIDDEN)
 
 
 class peakCreateAPIView(APIView):
@@ -195,7 +197,7 @@ class peakCreateAPIView(APIView):
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response(status=status.HTTP_403_FORBIDDEN)
+            return Response(ACCESS_RESTRICTION_ERROR_MSG, status=status.HTTP_403_FORBIDDEN)
 
 
 class peakUpdateAPIView(APIView):
@@ -216,4 +218,4 @@ class peakUpdateAPIView(APIView):
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response(status=status.HTTP_403_FORBIDDEN)
+            return Response(ACCESS_RESTRICTION_ERROR_MSG, status=status.HTTP_403_FORBIDDEN)
