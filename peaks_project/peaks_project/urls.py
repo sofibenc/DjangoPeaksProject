@@ -19,8 +19,10 @@ urlpatterns = [
     path('docs/', TemplateView.as_view(template_name='swagger-ui.html',
                                        extra_context={'schema_url': 'openapi-schema'}),
          name='swagger-ui'),
-    url(r'^openapi-schema', get_schema_view(title='Peaks App Swagger API', version="1.0.0", public=True),
-         name='openapi-schema'),
+    url(r'^openapi-schema', get_schema_view(title='Peaks App Swagger API',
+                                            renderer_classes=[OpenAPIRenderer, SwaggerUIRenderer],
+                                            version="1.0.0", public=True),
+        name='openapi-schema'),
 
     url(r'^docs_v2/', include_docs_urls(title='Peaks App Native API'))
 ]

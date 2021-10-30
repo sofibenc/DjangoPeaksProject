@@ -21,7 +21,8 @@ class Peak(models.Model, GeoItem):
 
     @property
     def geomap_popup_view(self):
-        return "<strong>{}</strong>".format(str(self.name))
+        return "<strong>{}</strong><br><strong>Altitude = {} km</strong>".\
+            format(str(self.name), str(self.altitude))
 
     @property
     def geomap_popup_edit(self):

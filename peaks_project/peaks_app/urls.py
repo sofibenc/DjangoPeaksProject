@@ -28,6 +28,6 @@ urlpatterns = [
     path('create', views.peakCreateAPIView.as_view(), name="create2"),
     path('update/<str:pk>/', views.peakUpdateAPIView.as_view(), name="update2"),
     path('delete/<str:pk>', views.peakDelete, name="delete"),
-    url(r'^listboundingbox/$', views.peakListBoundingBoxAPIView.as_view(), name="peaksBoundingBox2"),
+    url(r'^listboundingbox/$', views.peakListBoundingBoxAPIView.as_view(), name="peaksBoundingBox"),
     path('listall', views.peakList, name="listall")
 ]
