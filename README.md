@@ -7,7 +7,8 @@ This README should:
 3. Show API Documentation access
 4. Show How to test API
 5. Show Main web page
-6. Provide some basic commands.
+6. Explain implemented IP Filtering
+7. Provide some basic commands.
 
 
 ## 1. Build and run the container
