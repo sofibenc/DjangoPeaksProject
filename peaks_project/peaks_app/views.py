@@ -18,9 +18,11 @@ from .models import Peak, WhitelistCountry, RejectedConnection
 from .serializers import PeakSerializer
 
 ACCESS_RESTRICTION_ERROR_MSG = {"Detail": "Operation not permitted in your country"}
+MY_IPINFO_TOKEN = "4be8f32f80c8a5"
+
 
 def get_ip_details(ip_address=None):
-    ipinfo_token = "4be8f32f80c8a5"
+    ipinfo_token = MY_IPINFO_TOKEN
     ipinfo_settings = {}
     ip_data = ipinfo.getHandler(ipinfo_token, **ipinfo_settings)
     ip_data = ip_data.getDetails(ip_address)
@@ -111,7 +113,7 @@ class peakListBoundingBoxViewSchema(AutoSchema):
 @api_view(['GET'])
 def peakList(request):
     """
-    get: Get all peaks.
+    get: Retrieve all peaks.
     """
     authorized = is_in_whitelist(request)
     if authorized[0]:
@@ -139,7 +141,7 @@ def peakDelete(request, pk):
 @api_view(['GET'])
 def peakRead(request, pk):
     """
-    get: Get detail of a specefic peak.
+    get: Get detail of a specific peak.
     """
     authorized = is_in_whitelist(request)
     if authorized[0]:
@@ -152,7 +154,8 @@ def peakRead(request, pk):
 
 class peakListBoundingBoxAPIView(APIView):
     """
-    get: Get list of peaks delimited by given bounding box coordinates.
+    get: Get list of peaks delimited by given bounding box coordinates: \
+    1st point = (top, left), 2nd point = (right, bottom)
     """
     schema = peakListBoundingBoxViewSchema()
     serializer_class = PeakSerializer
