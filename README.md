@@ -75,6 +75,8 @@ The main web page is available in: http://127.0.0.1:8000
 
 It's a html/javascript page that displays all peaks on a graphic map, using [OpenStreetMap](https://www.openstreetmap.org/)
 
+![alt text](https://user-images.githubusercontent.com/9654861/139561807-fb0cb54a-92e9-4a7d-9bc7-435fb240482b.png)
+
 
 ## 6. ip filtering
 
