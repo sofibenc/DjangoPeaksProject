@@ -53,6 +53,8 @@ The API documentation shows how to use REST api endpoints to:
 
 It is available in http://127.0.0.1:8000/docs/
 
+![alt text](https://user-images.githubusercontent.com/9654861/139561930-54844a2a-55db-443a-9a2c-aef4337a5b06.png)
+
 
 ## 4. Testing API
 
